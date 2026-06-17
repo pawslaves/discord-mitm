@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>yamaha's defamatory</title>
+        <link rel="icon" href="favicon.ico" sizes="any" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="hdr">
+                <div class="brand">
+                    <img src="logo.png" alt="" class="brand-logo" />
+                    <div>
+                        <h1>yamaha's defamatory</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="row cfg-row">
+                    <div class="field">
+                        <label>config</label>
+                        <select id="cfg-select"></select>
+                    </div>
+                    <div class="field">
+                        <label>name</label>
+                        <input
+                            id="cfg-name"
+                            type="text"
+                            placeholder="groupchat of cara, petit"
+                        />
+                    </div>
+                </div>
+                <div class="row cfg-actions">
+                    <button id="btn-cfg-new" class="btn">new</button>
+                    <button id="btn-cfg-save" class="btn dim">
+                        save config
+                    </button>
+                    <button id="btn-cfg-copy" class="btn">save as</button>
+                    <button id="btn-cfg-default" class="btn">
+                        set default
+                    </button>
+                    <button id="btn-cfg-del" class="btn danger">delete</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="row cfg-row">
+                    <div class="field">
+                        <label>channel id</label>
+                        <input
+                            id="inp-ch"
+                            type="text"
+                            placeholder="1502315137053495501"
+                        />
+                    </div>
+                    <label class="check-field">
+                        <input id="inp-group" type="checkbox" />
+                        <span>group chat</span>
+                    </label>
+                    <label class="check-field">
+                        <input id="time-24" type="checkbox" />
+                        <span>24h time</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <button id="btn-rec" class="btn">start recording</button>
+                    <button id="btn-stop" class="btn danger hidden">
+                        stop recording
+                    </button>
+                    <button id="btn-prx-off" class="btn">stop proxy</button>
+                </div>
+                <div class="status-row">
+                    <span id="rec-dot" class="rec-dot hidden"></span>
+                    <span id="rec-txt"></span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="toolbar">
+                    <h2 id="users-hd">users (0)</h2>
+                    <button id="btn-refresh-authors" class="btn">
+                        refresh
+                    </button>
+                </div>
+                <div class="user-tools">
+                    <input id="user-id" type="text" placeholder="user id" />
+                    <input
+                        id="user-name"
+                        type="text"
+                        placeholder="display name"
+                    />
+                    <input
+                        id="user-avatar"
+                        type="text"
+                        placeholder="avatar hash or url"
+                    />
+                    <button id="btn-user-add" class="btn">add user</button>
+                </div>
+                <div id="user-list" class="user-list"></div>
+            </div>
+
+            <div class="panel">
+                <div class="toolbar">
+                    <h2 id="msgs-hd">messages (0)</h2>
+                    <button id="btn-add" class="btn">+ add</button>
+                </div>
+                <div id="msg-list">
+                    <div class="no-msgs">
+                        no messages -- record or add manually
+                    </div>
+                </div>
+            </div>
+
+            <div class="ftr">
+                <span id="save-ok" class="save-ok"></span>
+                <button id="btn-save" class="btn dim">save</button>
+            </div>
+        </div>
+
+        <div id="modal" class="modal-bg hidden">
+            <div class="modal-box">
+                <h2>add message</h2>
+                <div class="tabs">
+                    <button class="tab-btn on" data-tab="text">text</button>
+                    <button class="tab-btn" data-tab="image">image</button>
+                    <button class="tab-btn" data-tab="call">call</button>
+                    <button class="tab-btn" data-tab="left">left</button>
+                    <button class="tab-btn" data-tab="kick">kick</button>
+                    <button class="tab-btn" data-tab="add">add</button>
+                </div>
+
+                <div id="tab-text" class="tab-pane on">
+                    <label>content</label>
+                    <textarea
+                        id="add-content"
+                        rows="3"
+                        placeholder="message content"
+                    ></textarea>
+                    <label class="mt8">reply to</label>
+                    <select id="add-text-reply"></select>
+                </div>
+
+                <div id="tab-image" class="tab-pane">
+                    <label>image url</label>
+                    <input
+                        id="add-img"
+                        type="text"
+                        placeholder="https://cdn.discordapp.com/..."
+                    />
+                    <label class="mt8">caption</label>
+                    <textarea
+                        id="add-cap"
+                        rows="2"
+                        placeholder="optional"
+                    ></textarea>
+                    <label class="mt8">reply to</label>
+                    <select id="add-img-reply"></select>
+                </div>
+
+                <div id="tab-call" class="tab-pane">
+                    <label>call ended at</label>
+                        <input
+                            id="add-call-end"
+                            class="dt-in"
+                            type="datetime-local"
+                        />
+                    <label class="mt8">lasted</label>
+                    <input id="add-call-len" type="text" placeholder="00:30" />
+                    <div id="add-call-parts" class="part-list"></div>
+                </div>
+
+                <div id="tab-left" class="tab-pane"></div>
+
+                <div id="tab-kick" class="tab-pane">
+                    <label>kicked user</label>
+                    <select id="kick-target"></select>
+                </div>
+
+                <div id="tab-add" class="tab-pane">
+                    <label>added user</label>
+                    <select id="add-target"></select>
+                </div>
+
+                <div class="modal-meta">
+                    <div class="field">
+                        <label>author</label>
+                        <select id="add-author"></select>
+                    </div>
+                    <div class="field">
+                        <label>timestamp</label>
+                        <input
+                            id="add-ts"
+                            class="dt-in"
+                            type="datetime-local"
+                        />
+                    </div>
+                </div>
+
+                <div id="no-authors" class="warn-txt hidden">
+                    no recorded authors -- record at least once first
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btn-add-ok" class="btn dim">add</button>
+                    <button id="btn-add-cancel" class="btn">cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
